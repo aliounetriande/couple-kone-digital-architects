@@ -199,6 +199,7 @@ const RoseCorner = {
 
 /* info */
 .info{
+position:absolute;
   font-family: Inter, system-ui;
   margin-top: 810px;
   font-size: 12px;
@@ -207,7 +208,14 @@ const RoseCorner = {
   text-transform: uppercase;
   color: rgba(80, 60, 25, .55);
   margin-bottom: 16px;
-  
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  z-index: 2;
+  pointer-events:none;
 }
 
 /* names — style carte */

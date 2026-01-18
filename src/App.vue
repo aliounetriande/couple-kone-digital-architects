@@ -29,7 +29,7 @@
       }"
       venue="Mosquée …, Ouagadougou"
       rsvp="+226 XX XX XX XX"
-      bg="/white-bg.png"
+      bg="#f9f4ee"
       topDeco="/invite-top.png"
       bottomDeco="/invite-bottom.png"
       frame="/photo-frame.png"

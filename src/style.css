@@ -22,31 +22,25 @@
 html,body{height:100%}
 body{
   margin:0;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial; ;
   color: var(--text);
-  background: none;
+  background: url("/white-bg.png"); /* ⬅ ton image */
+
+    background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* optionnel, joli sur desktop */
+  background-repeat: no-repeat;
   overflow-x:hidden;
 }
 
+/* voile transparent */
 body::before{
   content:"";
   position: fixed;
   inset: 0;
-  z-index: -2;
-  background: url("/white-bg.png") center/contain no-repeat; /* ✅ aucun zoom */
-}
-
-body::after{
-  content:"";
-  position: fixed;
-  inset: 0;
+  pointer-events: none;
+  background: rgba(255,255,255,0.55); /* ⬅ augmente/diminue (0.35 à 0.75) */
   z-index: -1;
-  pointer-events:none;
-  background:
-    radial-gradient(900px 420px at 20% 10%, rgba(217,180,107,.18), transparent 60%),
-    radial-gradient(800px 420px at 80% 20%, rgba(191,244,230,.10), transparent 60%),
-    radial-gradient(800px 520px at 50% 90%, rgba(217,180,107,.12), transparent 65%),
-    linear-gradient(180deg, rgba(249,244,238,.78), rgba(249,244,238,.88));
 }
 
 a{color:inherit}
