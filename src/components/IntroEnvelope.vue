@@ -13,7 +13,7 @@
       <div class="bismi">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
 
       <div class="inviteLine">
-        INVITATION
+        INVITATION AU <br> MARRIAGE DE
       </div>
 
       <!-- NOMS (police style carte) -->
@@ -88,6 +88,15 @@ onMounted(() => {
     yoyo: true,
     repeat: -1,
     ease: "sine.inOut",
+  });
+
+  // ✨ Pulse sur l'enveloppe (effet "clique-moi")
+  gsap.to(envImg.value, {
+    scale: 1.04,
+    duration: 1.2,
+    ease: "sine.inOut",
+    yoyo: true,
+    repeat: -2,
   });
 });
 

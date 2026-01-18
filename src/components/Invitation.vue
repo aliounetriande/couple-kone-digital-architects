@@ -175,6 +175,9 @@
 <script setup>
 import { onMounted, ref, onBeforeUnmount, reactive } from "vue";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const props = defineProps({
   /* couleurs harmonisées avec l’intro */
@@ -220,8 +223,190 @@ locations: { type: Array, default: () => [] },
 
 const card = ref(null);
 
-onMounted(() => {
-  gsap.from(card.value, { y: 14, opacity: 0, duration: 0.8, ease: "power2.out" });
+onMounted(() => {// 1️⃣ Animation d'entrée de la carte
+  gsap.from(card.value, { 
+    y: 40, 
+    opacity: 0, 
+    duration: 1, 
+    ease: "power3.out" 
+  });
+
+  // 2️⃣ Animation en cascade du header (visible dès le début)
+  gsap.from(".bismi, .smallCaps, .title", {
+    y: 30,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.15,
+    ease: "power2.out",
+    delay: 0.3
+  });
+
+  // 3️⃣ Animation des noms
+  gsap.from(".name", {
+    opacity: 0,
+    y: 20,
+    duration: 2,
+    stagger: 0.3,
+    ease: "power2.out",
+    delay: 0.6
+  });
+
+  gsap.from(".amp", {
+    scale: 0,
+    opacity: 0,
+    duration: 0.5,
+    ease: "back.out(2)",
+    delay: 1
+  });
+
+  // 4️⃣ Photo avec ScrollTrigger
+  gsap.from(".photoBlock", {
+    scale: 0.9,
+    opacity: 0,
+    duration: 2,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".photoBlock",
+      start: "top 85%",
+    }
+  });
+
+  // 5️⃣ Date box
+  gsap.from(".dateBox", {
+    y: 40,
+    opacity: 0,
+    duration: 2,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".dateBox",
+      start: "top 85%",
+    }
+  });
+
+  // 6️⃣ Section Programme
+  gsap.from(".programTitle, .programText", {
+    y: 30,
+    opacity: 0,
+    duration: 2,
+    stagger: 0.15,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".program",
+      start: "top 80%",
+    }
+  });
+
+  // 7️⃣ Steps du programme (effet rebond)
+  gsap.from(".step", {
+    x: -50,
+    opacity: 0,
+    duration: 2,
+    stagger: 0.2,
+    ease: "back.out(1.4)",
+    scrollTrigger: {
+      trigger: ".steps",
+      start: "top 80%",
+    }
+  });
+
+  // 8️⃣ Section Maps
+  gsap.from(".mapsTitle, .mapsSub", {
+    y: 30,
+    opacity: 0,
+    duration: 2,
+    stagger: 0.15,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".mapsBlock",
+      start: "top 80%",
+    }
+  });
+
+  // 9️⃣ Cartes Maps (apparition une par une)
+  gsap.from(".mapCard", {
+    y: 60,
+    opacity: 0,
+    duration: 2,
+    stagger: 0.25,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".mapsGrid",
+      start: "top 80%",
+    }
+  });
+
+  // 🔟 Section Countdown
+  gsap.from(".countTitle, .countSub", {
+    y: 30,
+    opacity: 0,
+    duration: 2,
+    stagger: 0.15,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".countdownBlock",
+      start: "top 85%",
+    }
+  });
+
+  // 1️⃣1️⃣ Tiles du countdown (effet scale)
+  gsap.from(".countTile", {
+    scale: 0.5,
+    opacity: 0,
+    duration: 2,
+    stagger: 0.1,
+    ease: "back.out(1.7)",
+    scrollTrigger: {
+      trigger: ".countGrid",
+      start: "top 85%",
+    }
+  });
+
+  // 1️⃣2️⃣ Section RSVP
+  gsap.from(".rsvp", {
+    y: 40,
+    opacity: 0,
+    duration: 2,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".rsvp",
+      start: "top 85%",
+    }
+  });
+
+  // 1️⃣3️⃣ Animation flottante continue (décorations)
+  gsap.to(".floralDeco", {
+    y: 15,
+    rotation: 3,
+    duration: 3,
+    ease: "sine.inOut",
+    yoyo: true,
+    repeat: -1
+  });
+
+  // 1️⃣4️⃣ Pulse subtil sur Bismillah
+  gsap.to(".bismi", {
+    scale: 1.03,
+    duration: 2.5,
+    ease: "sine.inOut",
+    yoyo: true,
+    repeat: -1
+  });
+
+  // ✨ Pulse sur l'enveloppe (effet "clique-moi")
+  gsap.to(".photoBlock", {
+    scale: 1.04,
+    duration: 2.2,
+    ease: "sine.inOut",
+    yoyo: true,
+    repeat: -1,
+  });
+
+
+
+  // Timer countdown
+  tick();
+  timer = setInterval(tick, 1000);
+
 });
 
 const cd = reactive({ days: 0, hours: 0, minutes: 0, seconds: 0, isOver:false });
@@ -246,13 +431,10 @@ function tick(){
   cd.seconds = Math.floor(s % 60);
 }
 
-onMounted(() => {
-  tick();
-  timer = setInterval(tick, 1000);
-});
-
 onBeforeUnmount(() => {
   if(timer) clearInterval(timer);
+  // Nettoyer les ScrollTriggers
+  ScrollTrigger.getAll().forEach(st => st.kill());
 });
 
 
@@ -361,6 +543,7 @@ onBeforeUnmount(() => {
 /* noms */
 .names{
   margin-top: 10px;
+  margin-bottom: 30px;
   font-family: "Great Vibes", cursive;
   font-size: clamp(44px, 10vw, 74px);
   line-height: 1;
@@ -392,6 +575,8 @@ onBeforeUnmount(() => {
   height:100%;
   object-fit: cover;
   display:block;
+  transform: scale(1.25);       /* ⬅ zoom (1.05 à 1.35) */
+  transform-origin: center; 
 }
 .frame{
   position:absolute;
@@ -405,7 +590,7 @@ onBeforeUnmount(() => {
 /* date */
 .dateBox{
   width: min(380px, 88vw);
-  margin: 14px auto 10px;
+  margin: 64px auto 10px;
   padding: 12px 12px 10px;
   border-top: 3px solid rgba(163,133,76,.35);
   border-bottom: 3px solid rgba(163,133,76,.35);
@@ -451,7 +636,7 @@ onBeforeUnmount(() => {
 
 /* PROGRAMME */
 .program{
-  margin-top: 60px;
+  margin-top: 40px;
   padding-top: 6px;
 }
 
