@@ -1,19 +1,12 @@
 <template>
   <div class="intro" :style="{ backgroundImage: `url(${bg})` }">
     <div class="veil"></div>
-    <img class="topFlower" src="/flower.png" alt="Fleur" aria-hidden="true"/>
-
-    <!-- fleurs décoratives -->
-    <div class="flower tr" aria-hidden="true"><RoseCorner /></div>
-    <div class="flower bl" aria-hidden="true"><RoseCorner /></div>
     
 
     <div class="content" ref="content">
-      <!-- petite ligne en haut -->
-      <div class="bismi">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ</div>
 
       <div class="inviteLine">
-        INVITATION AU <br> MARRIAGE DE
+        INVITATION AU <br> MARIAGE DE
       </div>
 
       <!-- NOMS (police style carte) -->
@@ -189,13 +182,6 @@ const RoseCorner = {
   padding: 14px 14px 8px;
 }
 
-/* bismillah */
-.bismi{
-  font-size: 22px;
-  color: rgba(163, 133, 76, .85);
-  margin-bottom: 6px;
-}
-
 /* small invite line */
 .inviteLine{
   font-family: Inter, system-ui;
@@ -204,6 +190,7 @@ const RoseCorner = {
   text-transform: uppercase;
   color: rgba(80, 60, 25, .55);
   margin-bottom: 16px;
+  margin-top: -80px;
 }
 
 /* info */
