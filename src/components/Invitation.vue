@@ -52,8 +52,8 @@
           <p class="programText">
             Les grandes familles <span class="fam">{{ program.groomFamily }}</span> et <span class="fam">{{ program.brideFamily }}</span>
             vous prient d’honorer de votre présence ce moment de bénédiction,
-            à l’occasion du mariage de leur enfant
-            <span class="child">{{ groom }}</span> et <span class="child">Raïcha Yasmina</span>.
+            à l’occasion du mariage de leurs enfants
+            <span class="child">{{ groom }}</span> et <span class="child">{{ bride }}</span>.
           </p>
 
           <div class="steps">
@@ -62,7 +62,7 @@
               <div class="stepBody">
                 <div class="stepLabel">Mariage religieux</div>
                 <div class="stepValue">
-                  {{ program.date }} à {{ program.time }} <br> {{ program.mosqueName }}
+                  {{ program.date }} à {{ program.time }} <br> Bassinko ( arriver à la 1ère station OTAM <br> à droite, tournez à gauche)
                 </div>
               </div>
         </div>
@@ -208,7 +208,7 @@ const props = defineProps({
     brideFamily: "ZIDA",
     date: "24 Janvier 2026",
     time: "15h30",
-    mosqueName: "Mosquée de Bassiko",
+    mosqueName: "Mosquée de Bassinko ( arriver à la 1ère station OTAM à droite, tournez à gauche)",
     receptionPlace: "Domicile de la mariée",
     mosqueIcon: "/mosque.png",
     homeIcon: "/home.png",

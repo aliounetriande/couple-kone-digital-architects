@@ -39,17 +39,18 @@
 
     <WeddingContent :data="data" />
 
-    <AudioBar src="/music.mp3" title="J’te donnerai - Lynda" />
+    <AudioBar ref="audioBar" src="/music.mp3" title="J’te donnerai - Lynda" />
   </template>
 </template>
 
 <script setup>
-import { reactive, ref, computed } from "vue";
+import { reactive, ref, computed, nextTick} from "vue";
 import IntroEnvelope from "./components/IntroEnvelope.vue";
 import Invitation from "./components/Invitation.vue";
 import AudioBar from "./components/AudioBar.vue";
 
 const opened = ref(false);
+const audioBar = ref(null);
 
 const data = reactive({
   bride: { name: "Yasmina", family: "ZIDA" },
@@ -78,5 +79,12 @@ const dateObj = computed(() => ({
 function handleOpened(){
   opened.value = true;
   window.scrollTo({ top: 0, behavior: "instant" });
+
+  // ✨ Démarrer la musique après l'ouverture de l'enveloppe
+  nextTick(() => {
+    if (audioBar.value) {
+      audioBar.value.play();
+    }
+  });
 }
 </script>

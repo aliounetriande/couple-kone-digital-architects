@@ -81,6 +81,23 @@ function seek() {
   audio.value.currentTime = current.value;
 }
 
+// ✨ Méthode publique pour démarrer la musique
+function play() {
+  if (!audio.value) return;
+  
+  audio.value.play().then(() => {
+    isPlaying.value = true;
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(sync);
+  }).catch(() => {
+    // Si bloqué (rare après interaction), on ne force pas
+    isPlaying.value = false;
+  });
+}
+
+// ✨ Expose la méthode pour que le parent puisse l'appeler
+defineExpose({ play });
+
 onMounted(() => {
   if (!audio.value) return;
 
