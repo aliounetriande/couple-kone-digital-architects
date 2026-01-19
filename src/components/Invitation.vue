@@ -160,7 +160,7 @@
         <!-- RSVP -->
         <div class="rsvp" v-if="rsvp">
           <div class="rsvpTitle">Infoline</div>
-          <div class="rsvpLine">76 71 49 35</div>
+          <div class="rsvpLine"> +226 01 02 36 26 <br>+226 75 69 94 07</div>
         </div>
 
         
